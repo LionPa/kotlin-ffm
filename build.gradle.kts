@@ -12,11 +12,20 @@ repositories {
 }
 
 java {
+    withSourcesJar()
     toolchain.languageVersion = JavaLanguageVersion.of(24)
 }
 
 kotlin {
     compilerOptions.freeCompilerArgs.add("-Xno-param-assertions")
+}
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            from(components["java"])
+        }
+    }
 }
 
 // Example task for generator
