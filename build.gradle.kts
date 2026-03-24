@@ -20,7 +20,7 @@ application {
 
 tasks.jar {
     manifest {
-        attributes("Main-Class" to "io.lionpa.kotlinffmgen.MainKt")
+        attributes("Main-Class" to "io.lionpa.kotlinffm.generator.MainKt")
     }
 
     from(configurations.runtimeClasspath.get().map {
