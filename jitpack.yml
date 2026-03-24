@@ -1,5 +1,0 @@
-jdk:
-  - openjdk24
-
-install:
-  - ./gradlew :build :publishToMavenLocal
