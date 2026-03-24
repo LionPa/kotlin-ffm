@@ -2,4 +2,4 @@ jdk:
   - openjdk24
 
 install:
-  - ./gradlew :KotlinFFM:build :library:publishToMavenLocal
+  - ./gradlew :build :publishToMavenLocal
