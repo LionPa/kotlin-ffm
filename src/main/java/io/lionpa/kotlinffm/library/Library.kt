@@ -20,6 +20,10 @@ open class Library {
         lookup = SymbolLookup.libraryLookup(file.absolutePath, Arena.global())
     }
 
+    constructor(lookup: SymbolLookup){
+        this.lookup = lookup
+    }
+
     fun method(name: String, returnType: MemoryLayout, vararg argLayouts : MemoryLayout) : MethodHandle {
         return linker.downcallHandle(
             lookup.findOrThrow(name),

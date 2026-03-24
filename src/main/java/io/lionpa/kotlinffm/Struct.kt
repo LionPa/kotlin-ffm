@@ -1,9 +1,9 @@
 package io.lionpa.kotlinffm
 
-import java.lang.foreign.Arena
 import java.lang.foreign.MemoryLayout
 import java.lang.foreign.MemoryLayout.sequenceLayout
 import java.lang.foreign.MemorySegment
+import java.lang.foreign.SegmentAllocator
 import java.lang.foreign.StructLayout
 
 open class Struct {
@@ -24,13 +24,13 @@ open class Struct {
     }
 
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun invoke(arena: Arena) : MemorySegment {
-        return arena.allocate(this.layout)
+    inline operator fun invoke(allocator: SegmentAllocator) : MemorySegment {
+        return allocator.allocate(this.layout)
     }
 
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun invoke(arena: Arena, size: Long) : MemorySegment {
-        return arena.allocate(sequenceLayout(size, layout))
+    inline operator fun invoke(allocator: SegmentAllocator, size: Long) : MemorySegment {
+        return allocator.allocate(sequenceLayout(size, layout))
     }
 }
 
