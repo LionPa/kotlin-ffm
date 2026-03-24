@@ -212,3 +212,8 @@ tasks.register<JavaExec>("generateStruct") {
     )
 }
 ```
+
+#### Download code generator
+Latest version of code generator you can download [HERE](https://github.com/LionPa/kotlin-ffm/releases/tag/generator)
+
+---
