@@ -4,7 +4,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "io.lionpa.io.lionpa.kotlinffm"
+group = "io.lionpa.kotlinffm"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -26,7 +26,7 @@ tasks.register<JavaExec>("generateStruct") {
     mainClass.set("io.lionpa.kotlinffm.generator.MainKt")
     workingDir = project.projectDir
 
-    classpath = files("generator/build/libs/generator-1.0.jar")
+    classpath = files("PATH/TO/generator-1.0.jar")
 
     args = listOf(
         "build/generator/Example.kt", // Where you want to generate new file
