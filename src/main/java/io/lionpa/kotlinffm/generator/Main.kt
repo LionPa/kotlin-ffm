@@ -54,7 +54,7 @@ fun defaultImports() : MutableSet<String> {
 
     imports.add("import io.lionpa.kotlinffm.*")
     imports.add("import java.lang.foreign.MemorySegment")
-    imports.add("import java.lang.foreign.Arena")
+    imports.add("import java.lang.foreign.SegmentAllocator")
 
     return imports
 }
@@ -129,16 +129,17 @@ private fun addGenerationComment(builder: StringBuilder, structName: String){
     )
 }
 
+
 private fun addWrapperConstructors(builder: StringBuilder, name: String){
     val firstSmall = name.replaceFirstChar { c -> c.lowercase() }
     builder.append(
         """
             @Suppress("NOTHING_TO_INLINE")
-            inline fun Arena.${firstSmall}() : ${name}MemorySegment {
+            inline fun SegmentAllocator.${firstSmall}() : ${name}MemorySegment {
                 return ${name}MemorySegment(allocate(${name}.layout))
             }
             
-            inline fun Arena.${firstSmall}(crossinline block : ${name}MemorySegment.() -> Unit) : ${name}MemorySegment {
+            inline fun SegmentAllocator.${firstSmall}(crossinline block : ${name}MemorySegment.() -> Unit) : ${name}MemorySegment {
                 val $firstSmall = ${name}MemorySegment(allocate(${name}.layout))
                 block(${firstSmall})
                 return $firstSmall
