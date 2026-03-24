@@ -1,6 +1,7 @@
 plugins {
     id("org.jetbrains.gradle.plugin.idea-ext") version "1.4"
     kotlin("jvm") version "2.2.20"
+    id("maven-publish")
 }
 
 group = "io.lionpa.io.lionpa.kotlinffm"
