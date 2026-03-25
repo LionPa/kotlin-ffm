@@ -11,8 +11,9 @@ open class Struct {
     val byteSize : Long
     val structAlignment : Long
 
-    constructor(vararg args : MemoryLayout){
-        layout = MemoryLayout.structLayout(*args)
+    constructor(vararg args : MemoryLayout?){
+        val notNullArgs = args.filterNotNullTo(ArrayList<MemoryLayout>())
+        layout = MemoryLayout.structLayout(*notNullArgs.toTypedArray())
         byteSize = layout.byteSize()
         structAlignment = layout.byteAlignment()
     }
@@ -21,6 +22,12 @@ open class Struct {
         val varHandle = layout.varHandle(MemoryLayout.PathElement.groupElement(varName))
 
         return TypeVarHandle(varHandle)
+    }
+
+    @Suppress("NOTHING_TO_INLINE")
+    inline fun <T> varHandle(include: Boolean, varName: String) : TypeVarHandle<T>? {
+        if (!include) return null
+        return varHandle(varName)
     }
 
     @Suppress("NOTHING_TO_INLINE")

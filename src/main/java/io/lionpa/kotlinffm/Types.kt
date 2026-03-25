@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package io.lionpa.kotlinffm
 
 import java.lang.foreign.AddressLayout
@@ -34,6 +36,37 @@ fun array(name: String, size: Long, layout: MemoryLayout) : SequenceLayout =
 
 // Only for code generation // TODO Add to generator
 fun string(name: String) : MemoryLayout = ValueLayout.ADDRESS.withName(name).withByteAlignment(8)
+
+
+/* DEBUG */
+
+inline fun address(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.ADDRESS.withName(name).withByteAlignment(8) else null
+
+inline fun byte(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_BYTE.withName(name) else null
+
+inline fun bool(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_BOOLEAN.withName(name) else null
+
+inline fun char(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_CHAR.withName(name) else null
+
+inline fun short(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_SHORT.withName(name) else null
+
+inline fun int(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_INT.withName(name) else null
+
+inline fun long(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_LONG.withName(name) else null
+
+inline fun float(include: Boolean, name: String): MemoryLayout? = if (include) ValueLayout.JAVA_FLOAT.withName(name) else null
+
+inline fun double(include: Boolean, name: String) : MemoryLayout? = if (include) ValueLayout.JAVA_DOUBLE.withName(name) else null
+
+inline fun padding(include: Boolean, byte: Long) : MemoryLayout? = if (include) MemoryLayout.paddingLayout(byte) else null
+
+inline fun array(include: Boolean, name: String, size: Int, layout: MemoryLayout) : SequenceLayout? =
+    if (include) MemoryLayout.sequenceLayout(size.toLong(), layout).withName(name)
+    else null
+
+inline fun array(include: Boolean, name: String, size: Long, layout: MemoryLayout) : SequenceLayout? =
+    if (include) MemoryLayout.sequenceLayout(size, layout).withName(name)
+    else null
 
 
 val address : AddressLayout = ValueLayout.ADDRESS
